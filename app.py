@@ -65,9 +65,9 @@ def get_tobs():
 
 @app.route("/api/v1.0/<start>")
 @app.route("/api/v1.0/<end>")
-def get_start(start, end = '2017-08-23'):
+def start(start, end = '2017-08-23'):
     session = Session(engine)
-    # return { station: name for station, name in session.query(station.station, station.name).all() }
+    return { measurement: date for measurement, date in session.query(measurement.date, measurement.station).all() }
 
 
 
