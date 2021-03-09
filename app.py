@@ -53,9 +53,23 @@ def prcp():
 
 @app.route("/api/v1.0/stations")
 def get_stations():
-    # Create our session (link) from Python to the DB
     session = Session(engine)
     return { station: name for station, name in session.query(station.station, station.name).all() }
+
+
+@app.route("/api/v1.0/tobs")
+def get_tobs():
+    session = Session(engine)
+    return { measurement: tobs for measurement, tobs in session.query(measurement.date, measurement.station).all() }
+
+
+@app.route("/api/v1.0/<start>")
+@app.route("/api/v1.0/<end>")
+def get_start(start, end = '2017-08-23'):
+    session = Session(engine)
+    # return { station: name for station, name in session.query(station.station, station.name).all() }
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
